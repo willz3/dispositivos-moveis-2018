@@ -37,5 +37,27 @@
             android:textSize="18sp"
             android:id="@+id/tv_github_resultado"/>
     </ScrollView>
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_mensagem_erro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:text="@string/mensagem_erro"
+            android:padding="16dp"
+            android:visibility="invisible"
+            android:textColor="#F00"
+            android:textAlignment="center"/>
+        <ProgressBar
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:id="@+id/pb_aguarde"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
+    </FrameLayout>
 
 </LinearLayout>
