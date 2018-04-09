@@ -82,32 +82,6 @@ class GoalController{
         return jArray
 
     }
-//
-//    fun goalToJSON(goal: ModGoal): JSONObject?{
-//        try{
-//            val formater = SimpleDateFormat("dd/MM/yyyy")
-//            val goalJson = JSONObject()
-//            goalJson.put("title", goal.title)
-//            goalJson.put("description", goal.desc)
-//            goalJson.put("deadline", formater.format(goal.deadline))
-//            goalJson.put("dtConclusion", if(goal.dtConclusion == null)"" else formater.format(goal.dtConclusion))
-//            goalJson.put("completed", goal.completed)
-//            return goalJson
-//        }catch (e: Exception){
-//            e.printStackTrace()
-//            return null
-//        }
-//    }
-//
-//    fun saveNewGoal(context: Context, goal: JSONObject){
-//        try{
-//            val fileStream: FileOutputStream = context.openFileOutput(OWN_FILE_NAME, Context.MODE_PRIVATE);
-//            fileStream.write(goal.toString().toByteArray())
-//            fileStream.close()
-//        }catch (e: Exception){
-//            e.printStackTrace()
-//        }
-//    }
 
     fun saveAllGoals(context: Context ,jArray: JSONArray?){
         try{

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import br.grupointegrado.tads.goalsapp.myAdapter.Companion.EXTRA_MENSAGEM
 import kotlinx.android.synthetic.main.activity_goal_alter.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -33,7 +34,7 @@ class activity_goal_alter : AppCompatActivity() {
 
     fun saveModificationGoal(){
         val formater = SimpleDateFormat("dd/MM/yyyy")
-        val position = this.intent.getIntExtra(MainActivity.EXTRA_MENSAGEM, 0)
+        val position = this.intent.getIntExtra(EXTRA_MENSAGEM, 0)
         val title: String = et_title_alter.text.toString()
         val desc: String = et_desc_alter.text.toString()
         val deadline: Date = formater.parse(et_deadline_alter.text.toString())
@@ -82,7 +83,7 @@ class activity_goal_alter : AppCompatActivity() {
     }
 
     fun deleteGoal(){
-        val position = this.intent.getIntExtra(MainActivity.EXTRA_MENSAGEM, 0)
+        val position = this.intent.getIntExtra(EXTRA_MENSAGEM, 0)
         val goal = this.listGoals!![position]
         this.listGoals!!.remove(goal)
         val jArray = controller.goalArrayToJSON(this.listGoals!!)
@@ -91,7 +92,7 @@ class activity_goal_alter : AppCompatActivity() {
     }
 
     fun fillFields(){
-        val position = this.intent.getIntExtra(MainActivity.EXTRA_MENSAGEM, 0)
+        val position = this.intent.getIntExtra(EXTRA_MENSAGEM, 0)
         val formater = SimpleDateFormat("dd/MM/yyyy")
         val list = this.listGoals
         if (list != null){

@@ -26,24 +26,6 @@ class ModGoal{
     var deadline: Date
     var dtConclusion: Date?
     var completed: Boolean
-    override fun toString(): String {
-        var sb = StringBuilder()
-        var days = ((deadline.time - Date().time)/(1000*60*60*24))
-        val formater = SimpleDateFormat("dd/MM/yyyy")
-
-        sb.append("Título: $title").append("\n")
-
-        if ((completed) && dtConclusion != null){
-            sb.append("Meta concluida em: " + formater.format(dtConclusion))
-        }
-        else if (days < 0){
-            sb.append("Tempo limite excedido em: " + days*-1 + "dia(s)!")
-        }else{
-            sb.append("$days Dia(s) restante(s)!")
-        }
-
-        return sb.toString()
-    }
 
 
 }

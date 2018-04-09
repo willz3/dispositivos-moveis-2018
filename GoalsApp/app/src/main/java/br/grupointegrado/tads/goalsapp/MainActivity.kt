@@ -3,22 +3,18 @@ package br.grupointegrado.tads.goalsapp
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     var listGoals : ArrayList<ModGoal>? = null
     val controller = GoalController()
 
-    companion object {
-        val EXTRA_MENSAGEM = "br.grupointegrado.tads.goalapp.GOAL"
-    }
 
     fun fillListView(){
         val jArray = controller.fileToJSONArray(this)
@@ -27,16 +23,10 @@ class MainActivity : AppCompatActivity() {
             controller.saveAllGoals(this, null)
         }else{
             this.listGoals = controller.jsonArrayToGoalsArray(jArray)
-            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, this.listGoals)
-            val listView: ListView = findViewById(R.id.list_goals)
-            listView.adapter = adapter
-
-            listView.setOnItemClickListener() {
-                parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
-                val intent = Intent(this@MainActivity, activity_goal_alter::class.java)
-                intent.putExtra(EXTRA_MENSAGEM, position)
-                startActivity(intent)
-            }
+            val adapter = myAdapter(this@MainActivity, this.listGoals!!)
+            val layoutManager = LinearLayoutManager(this@MainActivity, LinearLayout.VERTICAL, false)
+            rv_goal.adapter = adapter
+            rv_goal.layoutManager = layoutManager
         }
 
     }

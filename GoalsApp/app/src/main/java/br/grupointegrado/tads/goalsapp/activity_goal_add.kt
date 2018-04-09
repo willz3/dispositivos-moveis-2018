@@ -44,6 +44,22 @@ class activity_goal_add : AppCompatActivity() {
         return false
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_goal_add)
+
+        btn_finish_new.setOnClickListener{
+            if(saveGoals()){
+                finish()
+            }
+
+        }
+
+        DataPickerUtils(this, et_deadline_new).DateDialog()
+
+    }
+
+
     fun validateFields(): Boolean{
         if (et_title_new.text.toString().equals("")){
             Toast.makeText(this,"Informe um título para a meta!", Toast.LENGTH_SHORT).show()
@@ -62,22 +78,5 @@ class activity_goal_add : AppCompatActivity() {
 
 
         return true
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_goal_add)
-
-        btn_finish_new.setOnClickListener{
-            if(saveGoals()){
-                finish()
-            }
-
-        }
-
-        DataPickerUtils(this, et_deadline_new).DateDialog()
-
-
     }
 }
