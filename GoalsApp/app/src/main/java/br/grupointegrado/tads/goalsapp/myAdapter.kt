@@ -33,19 +33,26 @@ class myAdapter : RecyclerView.Adapter<myAdapter.ViewHolder> {
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         val goal = this.listGoals[position]
-        var days = ((goal.deadline.time - Date().time)/(1000*60*60*24))
+        val dtGoal = Calendar.getInstance()
+        dtGoal.time = goal.deadline
+        val timeNow = Calendar.getInstance()
+        timeNow.time = Date()
+        val days = dtGoal.get(Calendar.DAY_OF_YEAR) - timeNow.get(Calendar.DAY_OF_YEAR)
+
 
         holder!!.tv_title!!.text = goal.title
 
         if ((goal.completed) && (goal.dtConclusion != null)){
-            holder!!.tv_date!!.text = "Meta completada em: " + formater.format(goal.dtConclusion).toString()
+            holder.tv_date!!.text = "Meta completada em: " + formater.format(goal.dtConclusion).toString()
         }else if (days < 0){
-            holder!!.tv_date!!.text = "Tempo limite excedido em: " + days*-1 + "dia(s)!"
-        }else{
-            holder!!.tv_date!!.text = "$days Dia(s) restante(s)!"
+            holder.tv_date!!.text = "Tempo limite excedido em: " + days*-1 + "dia(s)!"
+        }else if (days == 0){
+            holder.tv_date!!.text = "Ultimo dia para concluir a meta!!!"
+        } else{
+            holder.tv_date!!.text = "$days Dia(s) restante(s)!"
         }
 
-        holder!!.btn_edit!!.setOnClickListener{
+        holder.btn_edit!!.setOnClickListener{
             val intent = Intent(this.context, activity_goal_alter::class.java)
             intent.putExtra(EXTRA_MENSAGEM, position)
             this.context.startActivity(intent)
