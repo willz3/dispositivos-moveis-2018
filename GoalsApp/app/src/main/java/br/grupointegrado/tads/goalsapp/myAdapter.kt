@@ -38,18 +38,24 @@ class myAdapter : RecyclerView.Adapter<myAdapter.ViewHolder> {
         val timeNow = Calendar.getInstance()
         timeNow.time = Date()
         val days = dtGoal.get(Calendar.DAY_OF_YEAR) - timeNow.get(Calendar.DAY_OF_YEAR)
+        val years = dtGoal.get(Calendar.YEAR) - timeNow.get(Calendar.YEAR)
 
 
         holder!!.tv_title!!.text = goal.title
 
+
         if ((goal.completed) && (goal.dtConclusion != null)){
             holder.tv_date!!.text = "Meta completada em: " + formater.format(goal.dtConclusion).toString()
-        }else if (days < 0){
-            holder.tv_date!!.text = "Tempo limite excedido em: " + days*-1 + "dia(s)!"
-        }else if (days == 0){
-            holder.tv_date!!.text = "Ultimo dia para concluir a meta!!!"
-        } else{
-            holder.tv_date!!.text = "$days Dia(s) restante(s)!"
+        }else if(years < 0){
+            val aux = (365*years - days*-1) * - 1
+            holder.tv_date!!.text = "Meta excedida em: $aux dia(s)"
+        }else if(years > 0){
+            val aux = (365*years - days)
+            holder.tv_date!!.text = "$aux Dia(s) restante(s) para concluir a meta!"
+        }else if(years == 0 && days == 0){
+            holder.tv_date!!.text = "Último dia para concluir a meta!"
+        }else{
+            holder.tv_date!!.text = "$days Dia(s) para concluir a meta!"
         }
 
         holder.btn_edit!!.setOnClickListener{
@@ -67,9 +73,10 @@ class myAdapter : RecyclerView.Adapter<myAdapter.ViewHolder> {
 
     inner class ViewHolder : RecyclerView.ViewHolder {
 
+        val btn_edit: ImageButton?
         val tv_title: TextView?
         val tv_date: TextView?
-        val btn_edit: ImageButton?
+
 
         constructor(itemView: View?) : super(itemView) {
             tv_title = itemView?.findViewById<TextView>(R.id.tv_title)
