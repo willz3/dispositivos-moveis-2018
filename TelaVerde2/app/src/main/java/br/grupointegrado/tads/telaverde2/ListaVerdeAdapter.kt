@@ -16,7 +16,7 @@ class ListaVerdeAdapter : RecyclerView.Adapter<ListaVerdeAdapter.NumeroViewHolde
     var count = 0
 
     constructor(context: Context, list: List<Int>, itemClickListener: ItemClickListener){
-        this.context = context;
+        this.context = context
         this.lista = list
         this.itemClickListener = itemClickListener
     }
@@ -78,6 +78,6 @@ class ListaVerdeAdapter : RecyclerView.Adapter<ListaVerdeAdapter.NumeroViewHolde
      interface ItemClickListener{
         fun onItemClick(position: Int)
          fun onLongItemClick(position: Int)
-    }
+        }
 
 }

@@ -26,6 +26,8 @@ class activity_goal_add : AppCompatActivity() {
                 dtConclusion = Date()
 
             }
+
+
             val date = formater.parse(datestring)
             val goal = ModGoal(title, desc, date, dtConclusion, completed)
 

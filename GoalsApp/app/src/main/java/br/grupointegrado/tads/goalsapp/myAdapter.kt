@@ -43,17 +43,17 @@ class myAdapter : RecyclerView.Adapter<myAdapter.ViewHolder> {
 
         holder!!.tv_title!!.text = goal.title
 
-
         if ((goal.completed) && (goal.dtConclusion != null)){
             holder.tv_date!!.text = "Meta completada em: " + formater.format(goal.dtConclusion).toString()
-        }else if(years < 0){
+        }else if(years < 0 || days < 0){
             val aux = (365*years - days*-1) * - 1
-            holder.tv_date!!.text = "Meta excedida em: $aux dia(s)"
+            holder.tv_date!!.text = "Meta excedida em: $aux dia(s)!"
         }else if(years > 0){
             val aux = (365*years - days)
             holder.tv_date!!.text = "$aux Dia(s) restante(s) para concluir a meta!"
         }else if(years == 0 && days == 0){
             holder.tv_date!!.text = "Último dia para concluir a meta!"
+
         }else{
             holder.tv_date!!.text = "$days Dia(s) para concluir a meta!"
         }
@@ -68,8 +68,6 @@ class myAdapter : RecyclerView.Adapter<myAdapter.ViewHolder> {
     override fun getItemCount(): Int {
         return this.listGoals.size
     }
-
-
 
     inner class ViewHolder : RecyclerView.ViewHolder {
 

@@ -6,5 +6,9 @@
         android:title="@string/acao_atualizar"
         android:orderInCategory="1"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/acao_abrir_mapa"
+        android:title="Mapa"
+        app:showAsAction="ifRoom"/>
 
 </menu>
